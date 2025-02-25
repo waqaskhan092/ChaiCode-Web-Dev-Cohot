@@ -7,7 +7,8 @@ const addButton = document.getElementById("addButton");
 const taskList = document.getElementById("taskList");
 const totalTasks = document.getElementById("totalTasks");
 
-addButton.addEventListener("click", () => {
+// Function to add a new task (shared by both button click and Enter keypress)
+function addTask() {
   const taskText = taskInput.value.trim();
   if (taskText === "") return;
 
@@ -57,6 +58,16 @@ addButton.addEventListener("click", () => {
   taskInput.value = "";
 
   checkEmptyList();
+}
+
+// Add task on button click
+addButton.addEventListener("click", addTask);
+
+// Add task on "Enter" keypress inside the task input field
+taskInput.addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    addTask();
+  }
 });
 
 function checkEmptyList() {
